@@ -70,6 +70,8 @@ docker exec -it  mongo_db bash
 --in docker container - 
 use admin
 db.auth( 'admin', 'admin123' )
+db.createUser({user: "testUser", pwd: "testUser", roles : [{role: "readWrite", db: "test"}]});
+
 use mydatabase
 show dbs
 show collections
