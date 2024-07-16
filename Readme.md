@@ -52,7 +52,7 @@ http://localhost:8082/backoffice/status    #get
 http://localhost:8082/backoffice/bo-save   #post
 
 {
-    "id": "1",
+    "id": "2",
     "rfid": "684955886339",	
     "vehicle_number": "DA4AC4DD",
     "location": "delhi",	
@@ -75,7 +75,7 @@ db.createUser({user: "testUser", pwd: "testUser", roles : [{role: "readWrite", d
 use mydatabase
 show dbs
 show collections
-db.test.find();
+db.test123.find();
 
 db.createCollection("login");
 db.login.insert({"login" : "chandra"});
