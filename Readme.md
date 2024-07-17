@@ -67,6 +67,11 @@ docker run -d --name mongo_db -e MONGO_INITDB_ROOT_USERNAME=admin -e MONGO_INITD
 
 docker exec -it  mongo_db bash
 
+--windows
+ >mongo
+ --Linux/Unix
+ >mongosh
+
 --in docker container - 
 use admin
 db.auth( 'admin', 'admin123' )
