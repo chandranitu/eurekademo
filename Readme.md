@@ -43,11 +43,24 @@ http://localhost:8081/user/data
 key = testkey
 
 
-#cloud gateway
-http://localhost:8085/actuator
+#cloud gateway--------
+http://localhost:8085/actuator  
 http://localhost:8085/userservice/status
+http://localhost:8085/backoffice/status  
+#post via gateway
+http://localhost:8085/backoffice/bo-save  
+
+{
+    "id": "12",
+    "rfid": "684955886339",	
+    "vehicle_number": "DA4AC4DD",
+    "location": "delhi",	
+    "price": "30"   
+}
+
 
 #backoffice
+
 http://localhost:8082/backoffice/status    #get
 
 http://localhost:8082/backoffice/bo-save   #post
