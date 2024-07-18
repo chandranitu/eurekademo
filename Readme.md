@@ -1,12 +1,12 @@
-#Microservices
+# Microservices
 
-Postman is required
-
+#Postman is required
+#Zuul gateway no longer working .Inplace of this Spring cloud gateway
 
 http://localhost:8761/ eureka server
 http://localhost:8082  backoffice
 http://localhost:8081   user
-http://localhost:8085   zuul
+http://localhost:8085   cloud gateway
 
 http://localhost:8082/backoffice/status     test order status
 http://localhost:8081/user/status     test user status
@@ -43,8 +43,9 @@ http://localhost:8081/user/data
 key = testkey
 
 
-#zuul
-http://localhost:8085/user/status
+#cloud gateway
+http://localhost:8085/actuator
+http://localhost:8085/userservice/status
 
 #backoffice
 http://localhost:8082/backoffice/status    #get
