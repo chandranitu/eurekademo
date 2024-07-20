@@ -11,7 +11,17 @@ http://localhost:8083   switch
 http://localhost:8084   Admin
 http://localhost:8085   cloud gateway API
 http://localhost:8086   TMS fake data
+http://localhost:8080   keycloak
 
+#Have to capture
+Accounting
+gis ,geo fencing
+reporting
+voilation
+ola research
+cockpit centralize dashboard
+Keycloak
+--------------
 
 #Docker image build
 
@@ -46,6 +56,7 @@ http://localhost:8084/admin/status    #get
 
 
 #user
+kicklock
 http://localhost:8081/user/status     user status
 http://localhost:8081/user/data
 
@@ -125,5 +136,20 @@ db.login.find();
 db.COLLECTION_NAME.drop()
 db.test.drop()
 
+#keycloak
+# docker compose has changed in ubuntu 24 (docker compose NOT docker-compose)
+docker compose -f docker-compose-keyCloak.yml up -d
 
+#postgres
+create database keycloak_db;
+CREATE USER keycloak WITH PASSWORD 'keycloak@123';
+GRANT ALL PRIVILEGES ON DATABASE "keycloak_db" to keycloak;
+
+.env file
+------------------
+POSTGRES_DB=keycloak_db
+POSTGRES_USER=keycloak
+POSTGRES_PASSWORD=keycloak@123
+KEYCLOAK_ADMIN=admin
+KEYCLOAK_ADMIN_PASSWORD=Admin@1234
 
