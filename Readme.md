@@ -56,7 +56,7 @@ http://localhost:8084/admin/status    #get
 
 
 #user
-kicklock
+
 http://localhost:8081/user/status     user status
 http://localhost:8081/user/data
 
@@ -98,9 +98,11 @@ http://localhost:8082/backoffice/status
 
 
 #switch
+-- Mongo table-vehicle
 http://localhost:8083/switch/status    #get
+-- Run vehicle.py before working. It will insert vehicle data in mongo DB
 
-
+43DC1D4B
 
 #TMS  Fake Data 
 
@@ -122,11 +124,15 @@ docker exec -it  mongo_db bash
 use admin
 db.auth( 'admin', 'admin123' )
 db.createUser({user: "testUser", pwd: "testUser", roles : [{role: "readWrite", db: "test"}]});
+db.auth( 'testUser', 'testUser' )
+db.system.users.find()   #list of users
+
 
 use mydatabase
 show dbs
 show collections
 db.test123.find();
+db.vehicle.find();
 
 db.createCollection("login");
 db.login.insert({"login" : "chandra"});
@@ -136,11 +142,13 @@ db.login.find();
 db.COLLECTION_NAME.drop()
 db.test.drop()
 
-#keycloak
+#keycloak  #postgres
 # docker compose has changed in ubuntu 24 (docker compose NOT docker-compose)
 docker compose -f docker-compose-keyCloak.yml up -d
 
-#postgres
+http://localhost:8080/
+admin/Admin@1234
+
 create database keycloak_db;
 CREATE USER keycloak WITH PASSWORD 'keycloak@123';
 GRANT ALL PRIVILEGES ON DATABASE "keycloak_db" to keycloak;
