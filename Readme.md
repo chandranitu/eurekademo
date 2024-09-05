@@ -57,23 +57,20 @@ http://localhost:8084/admin/status    #get
 
 #user
 
-http://localhost:8081/user/status     user status
+http://localhost:8081/userservice/status     user status
+
+#Method: post   save
+
+http://localhost:8081/userservice/data?key=chandra&value=kumar
+
+
+#Method: put  modify
 http://localhost:8081/user/data
 
-Method: post
-http://localhost:8081/user/data
-http://localhost:8081/user/data?key=chandra&value=kumar
-key = testkey
-value = testvalue
 
-Method: put
-http://localhost:8081/user/data
-key = testkey
-value = updatevalue
+#Method: delete
+http://localhost:8081/user/data?key=chandra
 
-Method: delete
-http://localhost:8081/user/data
-key = testkey
 
 
 #backoffice
@@ -143,10 +140,15 @@ db.COLLECTION_NAME.drop()
 db.test.drop()
 
 #keycloak  #postgres
+
 # docker compose has changed in ubuntu 24 (docker compose NOT docker-compose)
 docker compose -f docker-compose-keyCloak.yml up -d
 
+
 http://localhost:8080/
+http://192.168.68.118:8080
+https://192.168.68.118:8443
+http://192.168.1.22:8080
 admin/Admin@1234
 
 create database keycloak_db;
@@ -160,4 +162,5 @@ POSTGRES_USER=keycloak
 POSTGRES_PASSWORD=keycloak@123
 KEYCLOAK_ADMIN=admin
 KEYCLOAK_ADMIN_PASSWORD=Admin@1234
+
 
