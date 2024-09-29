@@ -23,6 +23,9 @@ cockpit centralize dashboard
 Keycloak
 --------------
 
+#Eureka server
+http://localhost:8761
+
 #Docker image build
 
 docker build -t eurekademo .
@@ -54,14 +57,53 @@ http://localhost:8085/backoffice/bo-save
 http://localhost:8084/admin/status    #get
 
 
+#swagger
+
+http://localhost:8081/swagger-ui/index.html
 
 #user
 
 http://localhost:8081/userservice/status     user status
 
+
 #Method: post   save
 
-http://localhost:8081/userservice/data?key=chandra&value=kumar
+http://localhost:8081/userservice/data?key=xyz&value=asdad&roles=admin  -- working
+
+http://localhost:8081/userservice/data
+paste in raw
+{
+    "key": "quantum",
+    "value": "password123",
+    "roles": [
+       {
+        "elementOne":"valueOne"
+       },
+       {
+        "elementTwo":"valueTwo"
+       }
+       ]
+}
+
+{
+      "address": "colombo",
+      "username": "hesh",
+      "password": "123",
+      "registetedDate": "2015-4-3",
+      "firstname": "hesh",
+      "contactNo": "07762",
+      "accountNo": "16161",
+      "lastName": "jay",         
+      "listName":[
+       {
+        "elementOne":"valueOne"
+       },
+       {
+        "elementTwo":"valueTwo"
+       },
+       ...]
+     }
+
 
 
 #Method: put  modify
@@ -70,6 +112,20 @@ http://localhost:8081/user/data
 
 #Method: delete
 http://localhost:8081/user/data?key=chandra
+
+
+
+{
+    "roles": ["ADMIN", "USER"]
+}
+
+{
+    "_id": "1",
+    "username": "john_doe",
+    "password": "password123",
+    "roles": ["ADMIN", "USER"]
+}
+
 
 
 
@@ -108,9 +164,9 @@ http://localhost:8086/switch/status    #get
 
 
 #Mongo ---------------
-docker run -d --name mongo_db -e MONGO_INITDB_ROOT_USERNAME=admin -e MONGO_INITDB_ROOT_PASSWORD=admin123 -e MONGO_INITDB_DATABASE=test -p 27017:27017 mongo
+docker run -d --name mongo -e MONGO_INITDB_ROOT_USERNAME=admin -e MONGO_INITDB_ROOT_PASSWORD=admin123 -e MONGO_INITDB_DATABASE=test -p 27017:27017 mongo
 
-docker exec -it  mongo_db bash
+docker exec -it  mongo bash
 
 -- windows client for CMD
  >mongo
@@ -120,15 +176,25 @@ docker exec -it  mongo_db bash
 --In docker container - 
 use admin
 db.auth( 'admin', 'admin123' )
-db.createUser({user: "testUser", pwd: "testUser", roles : [{role: "readWrite", db: "test"}]});
+
+use test;
+db.createUser({
+  user: "testUser",
+  pwd: "testUser",
+  roles: [{ role: "dbAdmin", db: "test" },
+  { role: "readWrite", db: "test" }   ]
+})
+
+db.getUsers()
+
+use test
 db.auth( 'testUser', 'testUser' )
-db.system.users.find()   #list of users
 
 
 use mydatabase
 show dbs
 show collections
-db.test123.find();
+db.users.find();
 db.vehicle.find();
 
 db.createCollection("login");
